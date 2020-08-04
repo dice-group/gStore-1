@@ -81,6 +81,8 @@ bool unload_handler(const HttpServer& server, const shared_ptr<HttpServer::Respo
 
 bool export_handler(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType);
 
+bool query_handler0_conform(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType);
+
 bool query_handler0(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType);
 
 bool query_handler1(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType);
@@ -1110,6 +1112,10 @@ int initialize(int argc, char* argv[])
   server.resource["^/\\?operation=query&db_name=(.*)&format=(.*)&sparql=(.*)$"]["GET"] = [&server](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
 		query_handler0(server, response, request, "GET");
   };
+
+    server.resource["^/\\?db_name=(.*)&query=(.*)$"]["GET"] = [&server](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
+        query_handler0_conform(server, response, request, "GET");
+    };
 
   //POST-example for the path /query0, responds with the matched string in path
   server.resource["/query0"]["POST"] = [&server](shared_ptr<HttpServer::Response> response, shared_ptr<HttpServer::Request> request) {
@@ -2811,6 +2817,44 @@ void query_thread(bool update_flag, string db_name, string format, string db_que
   }
 
   //return true;
+}
+
+bool query_handler0_conform(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType)
+{
+    string thread_id = Util::getThreadID();
+    string log_prefix = "thread " + thread_id + " -- ";
+    cout << log_prefix << "HTTP: this is query_handler1" << endl;
+    cout << "request->path: " << request->path << endl;
+
+    string db_name;
+    string format = "json";
+    string db_query;
+
+    std::cout << request->path_match.size() << std::endl;
+
+    if (RequestType == "GET") {
+        db_name = request->path_match[1];
+        db_query = request->path_match[2];
+        db_name = UrlDecode(db_name);
+        format = UrlDecode(format);
+        db_query = UrlDecode(db_query);
+    }
+
+
+    //check if the db_name is system
+    if (db_name == "system") {
+        string error = "no query privilege, operation failed.";
+        string resJson = CreateJson(404, error, 0);
+        *response << "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: " << resJson.length() << "\r\n\r\n" << resJson;
+        return false;
+    }
+
+    cout << "check privilege successfully: update" << endl;
+
+    query_num++;
+    Task* task = new Task(0, db_name, format, db_query, response, request);
+    pool.AddTask(task);
+    return true;
 }
 
 bool query_handler0(const HttpServer& server, const shared_ptr<HttpServer::Response>& response, const shared_ptr<HttpServer::Request>& request, string RequestType)

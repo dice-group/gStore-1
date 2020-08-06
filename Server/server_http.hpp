@@ -165,7 +165,7 @@ public:
     /// Timeout on request handling. Defaults to 5 seconds.
     size_t timeout_request = 5;
     /// Timeout on content handling. Defaults to 300 seconds.
-    size_t timeout_content = 3600;
+    size_t timeout_content = 180;
     /// IPv4 address in dotted decimal form or IPv6 address in hexadecimal notation.
     /// If empty, the address will be any address.
     std::string address;

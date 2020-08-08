@@ -2845,7 +2845,7 @@ bool query_handler0_conform(const HttpServer& server, const shared_ptr<HttpServe
     if (db_name == "system") {
         string error = "no query privilege, operation failed.";
         string resJson = CreateJson(404, error, 0);
-        *response << "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: " << resJson.length() << "\r\n\r\n" << resJson;
+        *response << "HTTP/1.1 200 OK\r\nContent-Type: application/sparql-results+json\r\nContent-Length: " << resJson.length() << "\r\n\r\n" << resJson;
         return false;
     }
 

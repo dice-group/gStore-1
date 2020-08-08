@@ -2764,7 +2764,7 @@ void query_thread(bool update_flag, string db_name, string format, string db_que
       resDoc.Accept(resWriter);
       string resJson = resBuffer.GetString();
 
-      *response << "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: " << resJson.length();
+      *response << "HTTP/1.1 200 OK\r\nContent-Type: application/sparql-results+json\r\nContent-Length: " << resJson.length();
       *response << "\r\nCache-Control: no-cache"
                 << "\r\nPragma: no-cache"
                 << "\r\nExpires: 0";

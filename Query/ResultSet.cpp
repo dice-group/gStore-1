@@ -139,7 +139,7 @@ ResultSet::to_JSON()
 {
   stringstream _buf;
 
-  _buf << "{ \"head\": { \"link\": [], \"vars\": [";
+  _buf << "{ \"head\": { \"vars\": [";
   for (int i = 0; i < this->select_var_num; i++) {
     if (i != 0)
       _buf << ", ";

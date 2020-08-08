@@ -2752,12 +2752,12 @@ void query_thread(bool update_flag, string db_name, string format, string db_que
       Document resDoc;
       Document::AllocatorType& allocator = resDoc.GetAllocator();
       resDoc.Parse(success.c_str());
-      resDoc.AddMember("StatusCode", 0, allocator);
-      resDoc.AddMember("StatusMsg", "success", allocator);
-      resDoc.AddMember("AnsNum", rs.ansNum, allocator);
-      string QueryTime = Util::int2string(query_time) + "ms";
-      resDoc.AddMember("QueryTime", StringRef(QueryTime.c_str()), allocator);
-      resDoc.AddMember("Filename", StringRef(filename.c_str()), allocator);
+//      resDoc.AddMember("StatusCode", 0, allocator);
+//      resDoc.AddMember("StatusMsg", "success", allocator);
+//      resDoc.AddMember("AnsNum", rs.ansNum, allocator);
+//      string QueryTime = Util::int2string(query_time) + "ms";
+//      resDoc.AddMember("QueryTime", StringRef(QueryTime.c_str()), allocator);
+//      resDoc.AddMember("Filename", StringRef(filename.c_str()), allocator);
 
       StringBuffer resBuffer;
       PrettyWriter<StringBuffer> resWriter(resBuffer);

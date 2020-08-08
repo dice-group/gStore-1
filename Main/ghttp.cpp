@@ -2743,10 +2743,10 @@ void query_thread(bool update_flag, string db_name, string format, string db_que
       outfile.open(localname);
       outfile << success;
       outfile.close();
-      if (rs.ansNum > 100) {
-        if (rs.output_limit == -1 || rs.output_limit > 100)
-          rs.output_limit = 100;
-      }
+//      if (rs.ansNum > 100) {
+//        if (rs.output_limit == -1 || rs.output_limit > 100)
+//          rs.output_limit = 100;
+//      }
       success = rs.to_JSON();
 
       Document resDoc;

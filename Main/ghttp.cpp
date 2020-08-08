@@ -2827,7 +2827,7 @@ bool query_handler0_conform(const HttpServer& server, const shared_ptr<HttpServe
     cout << "request->path: " << request->path << endl;
 
     string db_name;
-    string format = "json";
+    string format = "html";
     string db_query;
 
     std::cout << request->path_match.size() << std::endl;

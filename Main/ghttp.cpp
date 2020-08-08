@@ -45,7 +45,7 @@ typedef SimpleWeb::Client<SimpleWeb::HTTP> HttpClient;
 #define MAX_QUERYLOG_size 800000000
 #define QUERYLOG_PATH "logs/endpoint/"
 #define SYSTEM_USERNAME "system"
-#define MAX_OUTPUT_SIZE 100000
+#define MAX_OUTPUT_SIZE 10000000000
 #define TEST_IP "106.13.13.193"
 #define DB_PATH "."
 #define BACKUP_PATH "./backups"
@@ -1458,6 +1458,7 @@ bool stop_thread(pthread_t _thread)
 //(too slow: quit and restart)
 void* func_timer(void* _args)
 {
+    cerr << "Waiting for timeout." << endl;
   signal(SIGTERM, thread_sigterm_handler);
   sleep(Util::gserver_query_timeout);
   cerr << "Query out of time." << endl;

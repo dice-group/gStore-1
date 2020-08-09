@@ -34,7 +34,7 @@ using namespace boost::property_tree;
 typedef SimpleWeb::Server<SimpleWeb::HTTP> HttpServer;
 typedef SimpleWeb::Client<SimpleWeb::HTTP> HttpClient;
 
-#define THREAD_NUM 30
+#define THREAD_NUM 34
 #define MAX_DATABASE_NUM 100
 #define MAX_USER_NUM 1000
 #define ROOT_USERNAME "root"

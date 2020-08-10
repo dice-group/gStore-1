@@ -34,7 +34,7 @@ using namespace boost::property_tree;
 typedef SimpleWeb::Server<SimpleWeb::HTTP> HttpServer;
 typedef SimpleWeb::Client<SimpleWeb::HTTP> HttpClient;
 
-#define THREAD_NUM 30
+#define THREAD_NUM 32
 #define MAX_DATABASE_NUM 100
 #define MAX_USER_NUM 1000
 #define ROOT_USERNAME "root"
@@ -45,7 +45,7 @@ typedef SimpleWeb::Client<SimpleWeb::HTTP> HttpClient;
 #define MAX_QUERYLOG_size 800000000
 #define QUERYLOG_PATH "logs/endpoint/"
 #define SYSTEM_USERNAME "system"
-#define MAX_OUTPUT_SIZE 100000
+#define MAX_OUTPUT_SIZE -1
 #define TEST_IP "106.13.13.193"
 #define DB_PATH "."
 #define BACKUP_PATH "./backups"

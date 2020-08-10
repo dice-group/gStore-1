@@ -19,8 +19,8 @@ class QueryCache {
   const int TRIPLE_NUM_LIMIT = 30;
   const int VAR_NUM_LIMIT = 8;
   const int MINIMAL_EVA_TIME_LIMIT = 100;
-  const long long ITEM_MEMORY_LIMIT = 1000000LL;
-  const long long TOTAL_MEMORY_LIMIT = 100000000LL;
+  const long long ITEM_MEMORY_LIMIT = 8LL * 1000000LL;
+  const long long TOTAL_MEMORY_LIMIT = 8LL * 100000000LL;
 
   mutex query_cache_lock;
 
